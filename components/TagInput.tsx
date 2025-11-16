@@ -25,6 +25,11 @@ export default function TagInput() {
     })
   }
 
+  // タグの選択解除
+  const handleUnselectTag = (id: string) => {
+    setSelectedTagIds(prevIds => prevIds.filter(deleteId => deleteId !== id));
+  }
+
   // タグのフィルタリング
   const keyword = newTagName.toLocaleLowerCase().trim();
   const filteredTagList =
@@ -62,6 +67,20 @@ export default function TagInput() {
             </div>
           ))}
         </div>
+      </div>
+      <div>
+        選択済みタグ：<br />
+        {tagList.filter(tag => selectedTagIds.includes(tag.id)).map(tag => (
+          <span key={tag.id}>
+            {tag.name}
+            <button
+              onClick={e => {
+                e.preventDefault();
+                handleUnselectTag(tag.id);
+              }}
+            >×</button>
+          </span>
+        ))}
       </div>
     </>
   )
