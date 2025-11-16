@@ -5,10 +5,10 @@ export const revalidate = 0;
 
 export default async function Home() {
   return (
-    <div className="grid grid-cols-12 gap-x-5">
-      <div className="col-span-9">
-        <h1 className="text-3xl font-bold mb-8">記事の投稿</h1>
-        <form action={addBlog}>
+    <form action={addBlog}>
+      <div className="grid grid-cols-12 gap-x-5">
+        <div className="col-span-9">
+          <h1 className="text-3xl font-bold mb-8">記事の投稿</h1>
           <div className="mb-4">
             <input name="title" type="text" placeholder="タイトル" className="bg-gray-100 w-full px-3 py-3 rounded-sm" />
           </div>
@@ -41,11 +41,11 @@ export default async function Home() {
           <div className="text-center">
             <button type="submit" className="bg-blue-400 text-white px-10 py-2 rounded-sm cursor-pointer hover:bg-blue-500 transition">投稿</button>
           </div>
-        </form>
+        </div>
+        <div className="col-span-3">
+          <TagInput />
+        </div>
       </div>
-      <div className="col-span-3">
-        <TagInput />
-      </div>
-    </div>
+    </form>
   );
 }

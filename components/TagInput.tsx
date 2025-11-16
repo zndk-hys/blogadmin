@@ -64,7 +64,7 @@ export default function TagInput() {
       </div>
       <div className="border-1 border-gray-300 rounded-sm px-2 mb-3">
         <div style={{overflow: 'scroll'}} className="py-1 h-100">
-          {isPendingLoad ? <p>読み込み中</p> : tagList.map(tag => (
+          {isPendingLoad ? <p className="text-sm py-1 text-gray-400">読み込み中...</p> : tagList.map(tag => (
             <div key={tag.id} style={{display: filteredTagList.includes(tag.id) ? 'block' : 'none'}}>
               <label className="flex gap-1 py-1 cursor-pointer">
                 <div className="inline-flex items-center">
