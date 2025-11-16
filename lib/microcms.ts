@@ -1,5 +1,5 @@
 import { BlogPost } from "@/types/blog";
-import { TagGet } from "@/types/tag";
+import { TagGet, TagPost } from "@/types/tag";
 import { createClient, MicroCMSQueries } from "microcms-js-sdk";
 
 const client = createClient({
@@ -13,6 +13,14 @@ export async function fetchTagList(queries?: MicroCMSQueries) {
     queries,
   });
   return listData;
+}
+
+export async function createTag(content: TagPost, isDraft: boolean) {
+  return await client.create<TagPost>({
+    endpoint: 'tag',
+    content,
+    isDraft,
+  });
 }
 
 export async function createBlog(content: BlogPost, isDraft: boolean) {

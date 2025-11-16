@@ -1,13 +1,9 @@
 import addBlog from "@/actions/addBlog";
-import { fetchTagList } from "@/lib/microcms";
+import TagInput from "@/components/TagInput";
 
 export const revalidate = 0;
 
 export default async function Home() {
-  const tagList = await fetchTagList({
-    limit: 100,
-  });
-
   return (
     <div>
       <form action={addBlog}>
@@ -19,14 +15,7 @@ export default async function Home() {
           本文：<br />
           <textarea name="body"></textarea>
         </div>
-        <div>
-          タグ：<br />
-          {tagList.contents.map(tag => (
-            <div key={tag.id}>
-              <input type="checkbox" name="tags" value={tag.id} />{tag.name}
-            </div>
-          ))}
-        </div>
+        <TagInput />
         <div>
           公開日：<br />
           <input type="datetime-local" name="publishedAt" />
