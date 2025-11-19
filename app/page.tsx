@@ -1,4 +1,5 @@
 import addBlog from "@/actions/addBlog";
+import RichEditor from "@/components/RichEditor";
 import TagInput from "@/components/TagInput";
 
 export const revalidate = 0;
@@ -13,7 +14,7 @@ export default async function Home() {
             <input name="title" type="text" placeholder="タイトル" className="bg-gray-100 w-full px-3 py-3 rounded-sm" />
           </div>
           <div>
-            <textarea name="body" placeholder="本文" className="bg-gray-100 w-full h-100 px-3 py-3 rounded-sm"></textarea>
+            <RichEditor name="body"/><br />
           </div>
           <div className="text-sm mb-4">
             <div className="grid grid-cols-6 items-center h-15 border-b-1 border-gray-200">

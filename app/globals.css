@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+:root {
+  --outline-color: #1E429F;
+}
+
+@layer base {
+  :focus {
+    outline-width: 0;
+  }
+
+  input[type="text"]:focus,
+  input[type="datetime-local"]:focus,
+  textarea:focus {
+    outline-width: 2;
+    outline-style: solid;
+    outline-color: var(--outline-color);
+  }
+
+  ::placeholder {
+    color: #adb5bd;
+  }
+
+  .tiptap {
+    @apply p-3;
+    min-height: 100%;
+  }
+  
+  .tiptap p.is-editor-empty:first-child::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+
+  .tiptap h2 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+}

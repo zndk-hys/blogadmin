@@ -1,0 +1,1 @@
+export const RICH_EDITOR_HEIGHT = 400;
