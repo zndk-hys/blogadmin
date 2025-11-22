@@ -15,19 +15,21 @@ export default function Page() {
   }
 
   return (
-    <form action={onLogin}>
-      <div>
-        <input type="text" name="user" />
-      </div>
-      <div>
-        <input type="password" name="password" />
-      </div>
-      <div>
-        <button>ログイン</button>
-      </div>
-      <div>
-        {message}
-      </div>
-    </form>
+    <div className="max-w-md mx-auto">
+      <form action={onLogin}>
+        <div className="mb-4">
+          <input type="text" name="user" placeholder="ユーザー名" className="bg-gray-100 w-full px-3 py-3 rounded-sm" />
+        </div>
+        <div className="mb-4">
+          <input type="password" name="password" placeholder="パスワード" className="bg-gray-100 w-full px-3 py-3 rounded-sm" />
+        </div>
+        <div className="text-center">
+          <button className="bg-blue-400 text-white px-10 py-2 rounded-sm cursor-pointer hover:bg-blue-500 transition">ログイン</button>
+        </div>
+        <div>
+          {message}
+        </div>
+      </form>
+    </div>
   );
 }

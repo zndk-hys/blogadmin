@@ -50,7 +50,9 @@ export default async function Home() {
           </div>
         </div>
       </form>
-      <Logout />
+      <div className="text-right mt-6">
+        <Logout />
+      </div>
     </>
   );
 }

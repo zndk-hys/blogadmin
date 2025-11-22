@@ -10,6 +10,6 @@ export default function Logout() {
   }
 
   return (
-    <button onClick={onClick}>ログアウト</button>
+    <button onClick={onClick} className="bg-gray-200 text-gray-600 px-5 py-2 rounded-sm cursor-pointer hover:bg-gray-300 transition">ログアウト</button>
   )
 }
