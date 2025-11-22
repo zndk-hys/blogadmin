@@ -26,9 +26,11 @@ export default function Page() {
         <div className="text-center">
           <button className="bg-blue-400 text-white px-10 py-2 rounded-sm cursor-pointer hover:bg-blue-500 transition">ログイン</button>
         </div>
-        <div>
-          {message}
-        </div>
+        {message && (
+          <div className="text-center mt-3 text-red-400">
+            {message}
+          </div>
+        )}
       </form>
     </div>
   );
