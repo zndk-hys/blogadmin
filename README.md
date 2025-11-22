@@ -11,3 +11,4 @@ node -e 'const argon2 = require("argon2");
 
 `.env` の `ADMIN_PASS` に設定する。
 `.env` の値に `$` を直接使えないため、 `\$` に置換している。
+Vercelの環境変数に設定する際は `\$` ではなく `$` を使用する。
