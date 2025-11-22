@@ -1,23 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
-import checkIP from "./proxies/ip";
-import requireBasicAuth from "./proxies/basicAuth";
+import verifyJwt from "./proxies/jwt";
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   if (process.env.NODE_ENV === 'development') {
     return NextResponse.next();
   }
 
-  // IPチェック
-  const forbiddenIP = checkIP(request);
-  if (forbiddenIP) {
-    return forbiddenIP;
+  // ログイン画面は常にアクセス許可
+  if (request.nextUrl.pathname === '/login') {
+    return NextResponse.next();
   }
 
-  // Basic認証
-  const unauthorized = requireBasicAuth(request);
-  if (unauthorized) {
-    return unauthorized;
+  // JWT検証
+  const invalidJwt = await verifyJwt(request);
+  if (invalidJwt) {
+    return invalidJwt;
   }
 
   return NextResponse.next();
+}
+
+export const config = {
+  matcher: [
+    '/((?!api|_next/static|_next/image|.*\\.png$).*)',
+  ],
 }
