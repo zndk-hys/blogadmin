@@ -3,7 +3,14 @@
 import { createBlog } from "@/lib/microcms";
 import { BlogPost } from "@/types/blog";
 
-export default async function addBlog(formData: FormData) {
+export type AddBlogResponse = {
+  error: true;
+} | {
+  error: false;
+  id: string;
+};
+
+export default async function addBlog(formData: FormData): Promise<AddBlogResponse> {
   const raw = {
     title: String(formData.get('title') ?? ''),
     body: String(formData.get('body') ?? ''),
@@ -23,6 +30,16 @@ export default async function addBlog(formData: FormData) {
     }
   };
 
-  await createBlog(content, isDraft);
+  try {
+    const response = await createBlog(content, isDraft);
+    return {
+      error: false,
+      id: response.id,
+    };
+  } catch(e) {
+    return {
+      error: true,
+    };
+  }
 }
 

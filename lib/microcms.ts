@@ -24,7 +24,7 @@ export async function createTag(content: TagPost, isDraft: boolean) {
 }
 
 export async function createBlog(content: BlogPost, isDraft: boolean) {
-  await client.create<BlogPost>({
+  return await client.create<BlogPost>({
     endpoint: 'blog',
     content,
     isDraft,

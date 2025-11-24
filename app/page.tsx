@@ -1,14 +1,38 @@
+'use client'
+
 import addBlog from "@/actions/addBlog";
 import Logout from "@/components/Logout";
 import RichEditor from "@/components/RichEditor";
 import TagInput from "@/components/TagInput";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { FormEventHandler, useState } from "react";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 
-export const revalidate = 0;
+export default function Home() {
+  const [isOpenDialog, setOpenDialog] = useState(false);
+  const [isPostPending, setPostPending] = useState(false);
+  const [dialogContent, setDialogContent] = useState('');
 
-export default async function Home() {
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    
+    setPostPending(true);
+
+    const formData = new FormData(e.currentTarget);
+    const response = await addBlog(formData);
+    
+    setPostPending(false);
+    setDialogContent(response.error ? 'エラーが発生しました' : '投稿しました');
+    setOpenDialog(true);
+  }
+
   return (
     <>
-      <form action={addBlog}>
+      <form onSubmit={onSubmit}>
         <div className="grid grid-cols-12 gap-x-5">
           <div className="col-span-9">
             <h1 className="text-3xl font-bold mb-8">記事の投稿</h1>
@@ -42,7 +66,7 @@ export default async function Home() {
               </div>
             </div>
             <div className="text-center">
-              <button type="submit" className="bg-blue-400 text-white px-10 py-2 rounded-sm cursor-pointer hover:bg-blue-500 transition">投稿</button>
+              <button type="submit" className="bg-blue-400 text-white px-10 py-2 rounded-sm cursor-pointer hover:bg-blue-500 transition disabled:bg-gray-400" disabled={isPostPending}>投稿</button>
             </div>
           </div>
           <div className="col-span-3">
@@ -53,6 +77,17 @@ export default async function Home() {
       <div className="text-right mt-6">
         <Logout />
       </div>
+
+      <Dialog open={isOpenDialog} onOpenChange={isOpen => setOpenDialog(isOpen)}>
+        <DialogContent>
+          <VisuallyHidden>
+            <DialogTitle>投稿結果</DialogTitle>
+          </VisuallyHidden>
+          <div>
+            {dialogContent}
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
