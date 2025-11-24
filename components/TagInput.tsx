@@ -2,12 +2,17 @@
 
 import useTagList from "@/hooks/useTagList";
 import { Trash2 } from "lucide-react";
-import { MouseEventHandler, useState } from "react";
+import { Dispatch, MouseEventHandler, SetStateAction, useState } from "react";
 
-export default function TagInput() {
-  const [newTagName, setNewTagName] = useState('');
+type Props = {
+  newTagName: string;
+  setNewTagName: Dispatch<SetStateAction<string>>;
+  selectedTagIds: string[];
+  setSelectedTagIds: Dispatch<SetStateAction<string[]>>;
+}
+
+export default function TagInput({newTagName, setNewTagName, selectedTagIds, setSelectedTagIds}: Props) {
   const {isPendingLoad, isPendingAdd, tagList, addToTagList} = useTagList();
-  const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
 
   // タグ追加ボタン
   const handleAddTag: MouseEventHandler<HTMLButtonElement> = async (e) => {

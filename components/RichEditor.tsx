@@ -2,15 +2,16 @@
 
 import { RICH_EDITOR_HEIGHT } from '@/constants';
 import { Placeholder } from '@tiptap/extensions';
-import { useEditor, EditorContent } from '@tiptap/react'
+import { useEditor, EditorContent, Editor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useEffect, useRef, useState } from 'react';
 
 type Props = {
   name: string;
+  editorRef: (editor: Editor) => void;
 }
 
-export default function RichEditor({name}: Props) {
+export default function RichEditor({name, editorRef}: Props) {
   const [html, setHtml] = useState('');
   const [richEditorHeight, setRichEditorHeight] = useState(RICH_EDITOR_HEIGHT);
   const richEditorRef = useRef<HTMLDivElement | null>(null);
@@ -41,6 +42,12 @@ export default function RichEditor({name}: Props) {
 
     return () => resizeObserver.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (editor) {
+      editorRef(editor);
+    }
+  }, [editor, editorRef]);
 
   return (
     <div>

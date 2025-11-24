@@ -9,21 +9,33 @@ import {
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useRef, useState } from "react";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
+import { Editor } from '@tiptap/react'
 
 export default function Home() {
   const [isOpenDialog, setOpenDialog] = useState(false);
   const [isPostPending, setPostPending] = useState(false);
   const [dialogContent, setDialogContent] = useState('');
+  const editorRef = useRef<Editor|null>(null);
+  const [newTagName, setNewTagName] = useState('');
+  const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    const form = e.currentTarget;
     
     setPostPending(true);
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     const response = await addBlog(formData);
+
+    if (!response.error) {
+      form.reset();
+      editorRef.current?.commands.clearContent();
+      setNewTagName('');
+      setSelectedTagIds([]);
+    }
     
     setPostPending(false);
     setDialogContent(response.error ? 'エラーが発生しました' : '投稿しました');
@@ -40,7 +52,7 @@ export default function Home() {
               <input name="title" type="text" placeholder="タイトル" className="bg-gray-100 w-full px-3 py-3 rounded-sm" />
             </div>
             <div>
-              <RichEditor name="body"/><br />
+              <RichEditor name="body" editorRef={(editor) => editorRef.current = editor}/><br />
             </div>
             <div className="text-sm mb-4">
               <div className="grid grid-cols-6 items-center h-15 border-b-1 border-gray-200">
@@ -70,7 +82,7 @@ export default function Home() {
             </div>
           </div>
           <div className="col-span-3">
-            <TagInput />
+            <TagInput newTagName={newTagName} setNewTagName={setNewTagName} selectedTagIds={selectedTagIds} setSelectedTagIds={setSelectedTagIds}/>
           </div>
         </div>
       </form>
