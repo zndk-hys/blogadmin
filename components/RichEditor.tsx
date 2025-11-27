@@ -52,7 +52,7 @@ export default function RichEditor({name, editorRef}: Props) {
   return (
     <div>
       <div
-        className="has-focus:outline-2 outline-(--outline-color) rounded-sm overflow-scroll bg-gray-100 text-sm w-full resize-y"
+        className="has-focus:outline-2 outline-(--outline-color) rounded-sm overflow-scroll border-1 border-gray-300 box-content text-sm w-full resize-y"
         ref={richEditorRef}
         style={{height: `${richEditorHeight}px`}}
       >

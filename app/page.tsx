@@ -49,16 +49,16 @@ export default function Home() {
           <div className="col-span-9">
             <h1 className="text-3xl font-bold mb-8">記事の投稿</h1>
             <div className="mb-4">
-              <input name="title" type="text" placeholder="タイトル" className="bg-gray-100 w-full px-3 py-3 rounded-sm" />
+              <input name="title" type="text" placeholder="タイトル" className="border-1 border-gray-300 w-full px-3 py-3 rounded-sm" />
             </div>
-            <div>
-              <RichEditor name="body" editorRef={(editor) => editorRef.current = editor}/><br />
+            <div className="mb-2">
+              <RichEditor name="body" editorRef={(editor) => editorRef.current = editor}/>
             </div>
             <div className="text-sm mb-4">
               <div className="grid grid-cols-6 items-center h-15 border-b-1 border-gray-200">
                 <div>公開日</div>
                 <div className="col-span-5">
-                  <input type="datetime-local" name="publishedAt" className="bg-gray-100 px-3 py-2 rounded-sm" />
+                  <input type="datetime-local" name="publishedAt" className="border-1 border-gray-300 px-3 py-2 rounded-sm" />
                 </div>
               </div>
               <div className="grid grid-cols-6 items-center h-15 border-b-1 border-gray-200">
