@@ -54,7 +54,7 @@ export default function TagInput({newTagName, setNewTagName, selectedTagIds, set
               value={newTagName}
               onChange={e => setNewTagName(e.target.value)}
               onKeyDown={e => {if (e.key === 'Enter') { e.preventDefault()}}}
-              className="bg-gray-100 px-3 py-2 rounded-sm w-full"
+              className="border-1 border-gray-300 px-3 py-2 rounded-sm w-full"
               placeholder="検索"
             />
           </div>
