@@ -28,6 +28,14 @@ export default function Home() {
     setPostPending(true);
 
     const formData = new FormData(form);
+
+    // UTCに変換
+    const localPublishedAt = formData.get('publishedAt');
+    if (typeof localPublishedAt === 'string' && localPublishedAt !== '') {
+      const utc = new Date(localPublishedAt).toISOString();
+      formData.set('publishedAt', utc);
+    }
+
     const response = await addBlog(formData);
 
     if (!response.error) {
