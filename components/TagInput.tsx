@@ -72,7 +72,7 @@ export default function TagInput({newTagName, setNewTagName, selectedTagIds, set
           {isPendingLoad ? <p className="text-sm py-1 text-gray-400">読み込み中...</p> : tagList.map(tag => (
             <div key={tag.id} style={{display: filteredTagList.includes(tag.id) ? 'block' : 'none'}}>
               <label className="flex gap-1 py-1 cursor-pointer">
-                <div className="inline-flex items-center">
+                <div className="inline-flex items-start pt-[1.5px]">
                   <div className="flex items-center relative">
                     <input
                       type="checkbox"
