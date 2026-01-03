@@ -53,7 +53,7 @@ export default function Home() {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <div className="grid grid-cols-12 gap-x-5">
+        <div className="md:grid grid-cols-12 gap-x-5">
           <div className="col-span-9">
             <h1 className="text-3xl font-bold mb-8">記事の投稿</h1>
             <div className="mb-4">
@@ -85,12 +85,18 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="col-span-3">
+            <div className="mb-4">
+              <TagInput newTagName={newTagName} setNewTagName={setNewTagName} selectedTagIds={selectedTagIds} setSelectedTagIds={setSelectedTagIds}/>
+            </div>
+          </div>
+        </div>
+        <div className="md:grid grid-cols-12 gap-x-5">
+          <div className="col-span-9">
             <div className="text-center">
               <button type="submit" className="bg-blue-400 text-white px-10 py-2 rounded-sm cursor-pointer hover:bg-blue-500 transition disabled:bg-gray-400" disabled={isPostPending}>投稿</button>
             </div>
-          </div>
-          <div className="col-span-3">
-            <TagInput newTagName={newTagName} setNewTagName={setNewTagName} selectedTagIds={selectedTagIds} setSelectedTagIds={setSelectedTagIds}/>
           </div>
         </div>
       </form>
